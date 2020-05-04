@@ -15,5 +15,5 @@ spec:
     - name: http-metrics
       port: 10249
   selector:
-    component: kube-proxy
+    k8s-app: kube-proxy
 {{end}}
