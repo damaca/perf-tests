@@ -149,3 +149,9 @@ Vendor is created using [Go modules].
 [load test]: https://github.com/kubernetes/perf-tests/blob/master/clusterloader2/testing/load/config.yaml
 [overrides]: https://github.com/kubernetes/perf-tests/blob/master/clusterloader2/testing/density/5000_nodes/override.yaml
 [pod startup SLO]: https://github.com/kubernetes/community/blob/master/sig-scalability/slos/pod_startup_latency.md
+
+
+export KUBECONFIG=~/personal/TFM/kubeconfig.yml
+export KUBE_SSH_USER=root
+./clusterloader --testconfig ~/personal/TFM/testing/load/config.yaml --kubeconfig ${KUBECONFIG} --report-dir output --enable-prometheus-server --prometheus-scrape-kube-proxy --masterip 127.0.0.1 --mastername kind-control-plane --master-internal-ip $(kubectl get no -lkubernetes.io/role=master -o jsonpath='{range.items[*].status.addresses[?(@.type=="InternalIP")]}{.address}{"\n"}{end}') --tear-down-prometheus-server=false --provider local
+./clusterloader --testconfig /home/david/tfm/testing/load/config.yaml --kubeconfig /home/david/tfm/kubeconfig.yml --report-dir output --enable-prometheus-server --prometheus-scrape-kube-proxy --masterip 127.0.0.1 --mastername kind-control-plane --master-internal-ip $(kubectl get no -lkubernetes.io/role=master -o jsonpath='{range.items[*].status.addresses[?(@.type=="InternalIP")]}{.address}{"\n"}{end}') --tear-down-prometheus-server=false --provider local -v 6
